@@ -1,0 +1,27 @@
+const devConfig = {
+  MONGO_URL: 'mongodb://localhost:27017/IT-Job-Finder',
+  JWT_SECRET: 'cau-troi-xai-duoc',
+};
+
+const prodConfig = {
+  MONGO_URL: 'mongodb://sasdb:nhatquang98@ds159036.mlab.com:59036/sasdb',
+  JWT_SECRET: 'cau-troi-xai-duoc',
+};
+
+const defaultConfig = {
+  PORT: process.env.PORT || 7777,
+};
+
+function envConfig(env) {
+  switch (env) {
+    case 'dev':
+      return devConfig;
+    default:
+      return prodConfig;
+  }
+}
+
+export default {
+  ...defaultConfig,
+  ...envConfig(process.env.NODE_ENV),
+};
