@@ -11,6 +11,6 @@ routes.post('/login', authJwt, userController.login);
 routes.get('/:username', authJwt, userController.getUserDetail);
 routes.patch('/:username', authJwt, validate(userValidation.editProfile), userController.updateUser);
 routes.delete('/:username', authJwt, userController.deleteUser);
-routes.post('/register', authJwt, validate(userValidation.createUser), userController.register);
+routes.post('/register', validate(userValidation.createUser), userController.register);
 
 export default routes;
