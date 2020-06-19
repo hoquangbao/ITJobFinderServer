@@ -50,9 +50,11 @@ UserSchema.methods = {
   hashPassword(password) {
     return hashSync(password);
   },
+
   validatePassword(password) {
     return compareSync(password, this.password);
   },
+
   generateJWT(lifespan) {
     const today = new Date();
     const expirationDate = new Date(today);
@@ -66,11 +68,19 @@ UserSchema.methods = {
       constants.JWT_SECRET,
     );
   },
+
   toJSON() {
     return {
       _id: this._id,
       username: this.username,
       password: this.password,
+    };
+  },
+
+  toAuthJSON() {
+    return {
+      ...this.toJSON(),
+      token: this.generateJWT(1),
     };
   },
 };

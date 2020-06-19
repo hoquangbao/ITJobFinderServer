@@ -4,7 +4,7 @@ const devConfig = {
 };
 
 const prodConfig = {
-  MONGO_URL: 'mongodb://sasdb:nhatquang98@ds159036.mlab.com:59036/sasdb',
+  MONGO_URL: 'mongodb://baohq:bao0932002321@ds263927.mlab.com:63927/itjobfinder',
   JWT_SECRET: 'cau-troi-xai-duoc',
 };
 
@@ -24,4 +24,10 @@ function envConfig(env) {
 export default {
   ...defaultConfig,
   ...envConfig(process.env.NODE_ENV),
+
+  ROLE: {
+    ADMIN: 3,
+    EMPLOYER: 2,
+    CANDIDATE: 1,
+  },
 };

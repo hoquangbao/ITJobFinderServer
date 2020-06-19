@@ -3,31 +3,30 @@ import constants from '../config/constants';
 
 // NOTA: NOTADMIN
 export function roleNOTA(req, res, next) {
-  if (req.user.role) {
+  if (req.user.role != constants.ROLE.ADMIN) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
-
-// NOTS: NOTSTAFF
-export function roleNOTS(req, res, next) {
-  if (req.user.role != constants.ROLE.STAFF) {
+// NOTS: NOTEployer
+export function roleNOTE(req, res, next) {
+  if (req.user.role != constants.ROLE.EMPLOYER) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
-// NOTS: NOT ACCOUNTANT
+// NOTS: NOTCandidate
 export function roleNOTA2(req, res, next) {
-  if (req.user.role != constants.ROLE.ACCOUNTANT) {
+  if (req.user.role != constants.ROLE.CANDIDATE) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
 
-export function roleNOTO(req, res, next) {
+export function roleNOTOWN(req, res, next) {
   if (req.user._id !== req.params.id) {
     return next();
   }
@@ -36,33 +35,25 @@ export function roleNOTO(req, res, next) {
 
 
 export function roleAdmin(req, res, next) {
-  if (!req.user.role) {
+  if (req.user.role == constants.ROLE.ADMIN) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
-export function roleAccountant(req, res, next) {
-  if (req.user.role == constants.ROLE.ACCOUNTANT) {
+export function roleEmployer(req, res, next) {
+  if (req.user.role == constants.ROLE.EMPLOYER) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
-export function roleManager(req, res, next) {
-  if (req.user.role == constants.ROLE.MANAGER) {
+export function roleCandidate(req, res, next) {
+  if (req.user.role == constants.ROLE.CANDIDATE) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
-
-export function roleStaff(req, res, next) {
-  if (req.user.role == constants.ROLE.STAFF) {
-    return next();
-  }
-  return res.sendStatus(HTTPStatus.FORBIDDEN);
-}
-
 
 export function roleOwn(req, res, next) {
   if (req.user._id == req.params.id) {
