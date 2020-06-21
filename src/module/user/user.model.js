@@ -73,6 +73,12 @@ UserSchema.methods = {
       password: this.password,
     };
   },
+  toAuthJSON() {
+    return {
+      ...this.toJSON(),
+      token: this.generateJWT(constants.AUTH_TOKEN_LIFESPAN),
+    };
+  },
 };
 
 export default mongoose.model('User', UserSchema);
