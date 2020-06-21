@@ -7,7 +7,7 @@ import { authLocal } from '../../service/passport';
 const routes = new Router();
 
 routes.get('/', userController.getListUser);
-routes.post('/login', authLocal);
+routes.post('/login', validate(userValidation.login), authLocal);
 routes.get('/:id', userController.getUserDetail);
 routes.patch('/:id', validate(userValidation.editProfile), userController.updateUser);
 routes.delete('/:id', userController.deleteUser);
