@@ -70,13 +70,12 @@ UserSchema.methods = {
     return {
       _id: this._id,
       username: this.username,
-      password: this.password,
     };
   },
   toAuthJSON() {
     return {
       ...this.toJSON(),
-      token: this.generateJWT(constants.AUTH_TOKEN_LIFESPAN),
+      token: this.generateJWT(1),
     };
   },
 };
