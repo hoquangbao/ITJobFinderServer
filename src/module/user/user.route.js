@@ -2,7 +2,7 @@ import { Router } from 'express';
 import validate from 'express-validation';
 import * as userController from './user.controller';
 import userValidation from './user.validate';
-import { authJwt, authLocal } from '../../service/passport';
+import { authLocal } from '../../service/passport';
 
 const routes = new Router();
 
