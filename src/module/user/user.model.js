@@ -46,6 +46,13 @@ const UserSchema = new Schema({
   timestamps: true,
 });
 
+UserSchema.pre('save', function (next) {
+  if (this.isModified('password')) {
+    this.password = this.hashPassword(this.password);
+  }
+  return next();
+});
+
 UserSchema.methods = {
   hashPassword(password) {
     return hashSync(password);
