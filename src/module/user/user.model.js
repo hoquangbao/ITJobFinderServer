@@ -77,12 +77,14 @@ UserSchema.methods = {
     return {
       _id: this._id,
       username: this.username,
+      email: this.email,
+      phone: this.phone,
     };
   },
   toAuthJSON() {
     return {
       ...this.toJSON(),
-      token: this.generateJWT(1),
+      token: this.generateJWT(10),
     };
   },
 };
