@@ -87,4 +87,14 @@ UserSchema.methods = {
   },
 };
 
+UserSchema.index({ fullname: 'text' });
+
+UserSchema.statics = {
+  list({ search, queries } = {}) {
+    return search ?
+      this.find(queries, { score: { $meta: 'textScore' } }).sort({ score: { $meta: 'textScore' } }) :
+      this.find(queries).sort({ fullname: 1 });
+  },
+};
+
 export default mongoose.model('User', UserSchema);

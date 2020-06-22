@@ -21,18 +21,18 @@ export const getListUser = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
-  try {
-    const username = req.body.username;
-    const password = req.body.password;
-    const user = await User.findOne({ username, password });
-    const token = await user.generateJWT(1);
-    console.log(token);
-    return res.status(HTTPStatus.OK).send({ user, token });
-  } catch (error) {
-    return res.status(HTTPStatus.BAD_REQUEST).send(error.message);
-  }
-};
+// export const login = async (req, res) => {
+//   try {
+//     const username = req.body.username;
+//     const password = req.body.password;
+//     const user = await User.findOne({ username, password });
+//     const token = await user.generateJWT(1);
+//     console.log(token);
+//     return res.status(HTTPStatus.OK).send({ user, token });
+//   } catch (error) {
+//     return res.status(HTTPStatus.BAD_REQUEST).send(error.message);
+//   }
+// };
 
 export const register = async (req, res) => {
   try {
