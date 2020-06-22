@@ -44,10 +44,9 @@ export const register = async (req, res) => {
 };
 
 export const getUserDetail = async (req, res) => {
-  const username = req.params.username;
+  const id = req.params._id;
   try {
-    console.log(username);
-    const userDetail = await User.findOne({ username });
+    const userDetail = await User.findOne({ id });
     return res.status(HTTPStatus.OK).json(userDetail);
   } catch (error) {
     return res.status(HTTPStatus.BAD_REQUEST).json(error.message);
@@ -55,9 +54,9 @@ export const getUserDetail = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const username = req.params.username;
+  const id = req.params._id;
   try {
-    const userDetail = await User.findOne({ username });
+    const userDetail = await User.findOne({ id });
     if (!userDetail) {
       return res.sendStatus(HTTPStatus.NOT_FOUND);
     }
@@ -75,9 +74,9 @@ export const updateUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-  const username = req.params.username;
+  const id = req.params._id;
   try {
-    const userDelete = await User.deleteOne({ username });
+    const userDelete = await User.deleteOne({ id });
     console.log(userDelete);
     return res.status(HTTPStatus.OK).json(userDelete);
   } catch (error) {

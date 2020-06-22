@@ -68,6 +68,7 @@ UserSchema.methods = {
     return jwt.sign(
       {
         _id: this._id,
+        username: this.username,
         exp: parseInt(expirationDate.getTime() / 1000, 10),
       },
       constants.JWT_SECRET,
@@ -77,6 +78,7 @@ UserSchema.methods = {
     return {
       _id: this._id,
       username: this.username,
+      fullname: this.fullname,
       email: this.email,
       phone: this.phone,
     };
@@ -84,7 +86,7 @@ UserSchema.methods = {
   toAuthJSON() {
     return {
       ...this.toJSON(),
-      token: this.generateJWT(10),
+      token: this.generateJWT(10000),
     };
   },
 };
