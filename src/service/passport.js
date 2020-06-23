@@ -15,7 +15,7 @@ const localOpts = {
 const localStrategy = new LocalStrategy(localOpts, async (req, username, password, done) => {
   try {
     const user = (!req.baseUrl.includes('admins')) ? await User.findOne({ username, isRemoved: false }) :
-      await User.findOne({ username, isRemoved: false });
+      await Admin.findOne({ username, isRemoved: false });
 
     if (!user) {
       return done(null, false);
