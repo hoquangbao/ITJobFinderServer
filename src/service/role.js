@@ -8,25 +8,23 @@ export function roleNOTA(req, res, next) {
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
-
-
-// NOTS: NOTSTAFF
-export function roleNOTS(req, res, next) {
-  if (req.user.role != constants.ROLE.STAFF) {
+// NOT EMPLOYER
+export function roleNOTEM(req, res, next) {
+  if (req.user.role != constants.ROLE.EMPLOYER) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
-// NOTS: NOT ACCOUNTANT
-export function roleNOTA2(req, res, next) {
-  if (req.user.role != constants.ROLE.ACCOUNTANT) {
+// NOTC: NOTCANDIDATE
+export function roleNOTC(req, res, next) {
+  if (req.user.role != constants.ROLE.CANDIDATE) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
-
+// NOT Own
 export function roleNOTO(req, res, next) {
   if (req.user._id !== req.params.id) {
     return next();
@@ -34,7 +32,7 @@ export function roleNOTO(req, res, next) {
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
-
+// Admin
 export function roleAdmin(req, res, next) {
   if (!req.user.role) {
     return next();
@@ -42,22 +40,15 @@ export function roleAdmin(req, res, next) {
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
-export function roleAccountant(req, res, next) {
-  if (req.user.role == constants.ROLE.ACCOUNTANT) {
+export function roleCandidate(req, res, next) {
+  if (req.user.role == constants.ROLE.CANDIDATE) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
 }
 
-export function roleManager(req, res, next) {
-  if (req.user.role == constants.ROLE.MANAGER) {
-    return next();
-  }
-  return res.sendStatus(HTTPStatus.FORBIDDEN);
-}
-
-export function roleStaff(req, res, next) {
-  if (req.user.role == constants.ROLE.STAFF) {
+export function roleEmployer(req, res, next) {
+  if (req.user.role == constants.ROLE.EMPLOYER) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);
@@ -66,22 +57,6 @@ export function roleStaff(req, res, next) {
 
 export function roleOwn(req, res, next) {
   if (req.user._id == req.params.id) {
-    return next();
-  }
-  return res.sendStatus(HTTPStatus.FORBIDDEN);
-}
-
-// AM: Admin or manager
-export function roleAM(req, res, next) {
-  if (!req.user.role || req.user.role == constants.ROLE.MANAGER) {
-    return next();
-  }
-  return res.sendStatus(HTTPStatus.FORBIDDEN);
-}
-
-// AMO: Admin, manager or own
-export function roleAMO(req, res, next) {
-  if (!req.user.role || req.user.role == constants.ROLE.MANAGER || req.user._id == req.params.id) {
     return next();
   }
   return res.sendStatus(HTTPStatus.FORBIDDEN);

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { compareSync, hashSync } from 'bcrypt-nodejs';
 import constants from '../../config/constants';
 
-const UserSchema = new Schema({
+const AdminSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -34,16 +34,6 @@ const UserSchema = new Schema({
     required: true,
     maxlength: [80, 'Fullname must equal or shorter than 80'],
   },
-  role: {
-    type: Number,
-    required: true,
-    validate: {
-      validator(v) {
-        return v == constants.ROLE.CANDIDATE || v == constants.ROLE.EMPLOYER;
-      },
-      message: props => `${props.value} is not a valid role number`,
-    },
-  },
   isRemoved: {
     type: Boolean,
     default: false,
@@ -52,14 +42,14 @@ const UserSchema = new Schema({
   timestamps: true,
 });
 
-UserSchema.pre('save', function (next) {
+AdminSchema.pre('save', function (next) {
   if (this.isModified('password')) {
     this.password = this.hashPassword(this.password);
   }
   return next();
 });
 
-UserSchema.methods = {
+AdminSchema.methods = {
   hashPassword(password) {
     return hashSync(password);
   },
@@ -75,6 +65,7 @@ UserSchema.methods = {
       {
         _id: this._id,
         username: this.username,
+        role: 'amdin',
         exp: parseInt(expirationDate.getTime() / 1000, 10),
       },
       constants.JWT_SECRET,
@@ -85,7 +76,6 @@ UserSchema.methods = {
       _id: this._id,
       username: this.username,
       fullname: this.fullname,
-      role: this.role,
       email: this.email,
       phone: this.phone,
     };
@@ -98,9 +88,9 @@ UserSchema.methods = {
   },
 };
 
-UserSchema.index({ fullname: 'text' });
+AdminSchema.index({ fullname: 'text' });
 
-UserSchema.statics = {
+AdminSchema.statics = {
   list({ search, queries } = {}) {
     return search ?
       this.find(queries, { score: { $meta: 'textScore' } }).sort({ score: { $meta: 'textScore' } }) :
@@ -108,4 +98,4 @@ UserSchema.statics = {
   },
 };
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model('Admin', AdminSchema);

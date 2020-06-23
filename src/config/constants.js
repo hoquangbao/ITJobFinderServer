@@ -24,4 +24,10 @@ function envConfig(env) {
 export default {
   ...defaultConfig,
   ...envConfig(process.env.NODE_ENV),
+
+  ROLE: {
+    EMPLOYER: 2,
+    CANDIDATE: 1,
+  },
+
 };
