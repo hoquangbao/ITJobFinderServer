@@ -24,7 +24,7 @@ const AdminSchema = new Schema({
     maxlength: [120, 'Email must equal or shorter than 120'],
   },
   phone: {
-    type: Number,
+    type: String,
     trim: true,
     required: true,
     maxlength: [10, 'Phone must equal or shorter than 10'],
