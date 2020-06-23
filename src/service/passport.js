@@ -4,7 +4,7 @@ import HTTPStatus from 'http-status';
 import LocalStrategy from 'passport-local';
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 import constants from '../config/constants';
-// import Employee from '../module/employee/employee.model';
+import Admin from '../module/admin/admin.model';
 import User from '../module/user/user.model';
 // import Company from '../module/company/company.model';
 
@@ -14,7 +14,8 @@ const localOpts = {
 };
 const localStrategy = new LocalStrategy(localOpts, async (req, username, password, done) => {
   try {
-    const user = await User.findOne({ username, isRemoved: false });
+    const user = (!req.baseUrl.includes('admins')) ? await User.findOne({ username, isRemoved: false }) :
+      await User.findOne({ username, isRemoved: false });
 
     if (!user) {
       return done(null, false);
