@@ -68,11 +68,10 @@ CompanySchema.methods = {
   toJSON() {
     return {
       _id: this._id,
-      username: this.username,
-      fullname: this.fullname,
-      role: this.role,
-      email: this.email,
-      phone: this.phone,
+      companyName: this.companyName,
+      address: this.address,
+      type: this.type,
+      description: this.description,
     };
   },
   toAuthJSON() {
