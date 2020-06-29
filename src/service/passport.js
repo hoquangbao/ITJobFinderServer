@@ -6,7 +6,7 @@ import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 import constants from '../config/constants';
 import Admin from '../module/admin/admin.model';
 import User from '../module/user/user.model';
-// import Company from '../module/company/company.model';
+import Company from '../module/company/company.model';
 
 const localOpts = {
   usernameField: 'username',
@@ -52,7 +52,8 @@ const jwtOpts = {
 const jwtStrategy = new JWTStrategy(jwtOpts, async (payload, done) => {
   try {
     const user = (payload.role == '') ? await User.findOne({ username: payload.username, isRemoved: false }) :
-      await Admin.findOne({ username: payload.username, isRemoved: false });
+      (payload.role == 'company') ? await Company.findOne({ _id: payload._d, isRemoved: false }) :
+        await Admin.findOne({ username: payload.username, isRemoved: false });
     if (!user) {
       return done(null, false);
     }
