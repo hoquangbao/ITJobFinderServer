@@ -75,6 +75,7 @@ UserSchema.methods = {
       {
         _id: this._id,
         username: this.username,
+        role: this.role,
         exp: parseInt(expirationDate.getTime() / 1000, 10),
       },
       constants.JWT_SECRET,
