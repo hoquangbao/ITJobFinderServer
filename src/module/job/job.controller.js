@@ -16,7 +16,7 @@ export const getListJob = async (req, res) => {
 
 export const createJob = async (req, res) => {
   try {
-    const job = await Job.create({ ...req.body, userId: req.user._id, companyId: req.company._id });
+    const job = await Job.create({ ...req.body, userId: req.user._id });
     return res.status(HTTPStatus.OK).json(job);
   } catch (e) {
     return res.status(HTTPStatus.BAD_REQUEST).json(e.message);
