@@ -21,7 +21,7 @@ export const createJob = async (req, res) => {
     if (!company) {
       return res.sendStatus(HTTPStatus.BAD_REQUEST);
     }
-    const job = await Job.create({ ...req.body, companyId: company._id });
+    const job = await Job.create({ ...req.body, company });
     return res.status(HTTPStatus.OK).json(job);
   } catch (e) {
     return res.status(HTTPStatus.BAD_REQUEST).json(e.message);
