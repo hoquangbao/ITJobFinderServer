@@ -8,9 +8,9 @@ import { authJwt } from '../../service/passport';
 const routes = new Router();
 
 routes.post('/create_job', authJwt, validate(jobValidate.createJob), jobController.createJob);
-routes.get('/', jobController.getListJob);
-routes.get('/:id', jobController.getJobDetail);
-routes.patch('/:id', jobController.updateJob);
-routes.delete('/:id', jobController.deleteJob);
+routes.get('/', authJwt, jobController.getListJob);
+routes.get('/:id', authJwt, jobController.getJobDetail);
+routes.patch('/:id', authJwt, jobController.updateJob);
+routes.delete('/:id', authJwt, jobController.deleteJob);
 
 export default routes;
