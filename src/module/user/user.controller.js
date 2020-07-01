@@ -15,6 +15,7 @@ export const getListUser = async (req, res) => {
   try {
     const listUser = await User.find({ isRemoved: false }).skip(offset).limit(limit);
     const total = await User.count();
+    console.log(req.user.username);
     return res.status(HTTPStatus.OK).json({ total, listUser });
   } catch (e) {
     return res.status(HTTPStatus.BAD_REQUEST).json(e.message);
