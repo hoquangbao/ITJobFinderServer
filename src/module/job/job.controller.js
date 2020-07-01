@@ -1,6 +1,7 @@
 import HTTPStatus from 'http-status';
 import Job from './job.model';
 import Company from '../company/company.model';
+import User from '../user/user.model';
 
 
 export const getListJob = async (req, res) => {
@@ -17,13 +18,15 @@ export const getListJob = async (req, res) => {
 
 export const createJob = async (req, res) => {
   try {
-    const company = await Company.findOne({ _id: req.user.company || req.body.companyId, isRemoved: false });
-    console.log(company);
-    console.log(req.user);
+    const company = await Company.findOne({ _id: req.body.companyId, isRemoved: false });
+    const user = await User.findOne({ _id: req.user._id, isRemoved: false });
     if (!company) {
       return res.sendStatus(HTTPStatus.BAD_REQUEST);
     }
-    const job = await Job.create({ ...req.body, company });
+    if (!user) {
+      return res.sendStatus(HTTPStatus.BAD_REQUEST);
+    }
+    const job = await Job.create({ ...req.body, company, userId: user._id });
     return res.status(HTTPStatus.OK).json(job);
   } catch (e) {
     return res.status(HTTPStatus.BAD_REQUEST).json(e.message);
