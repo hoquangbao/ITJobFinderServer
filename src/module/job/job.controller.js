@@ -17,7 +17,9 @@ export const getListJob = async (req, res) => {
 
 export const createJob = async (req, res) => {
   try {
-    const company = await Company.findOne({ _id: req.body.companyId, isRemoved: false });
+    const company = await Company.findOne({ _id: req.user.company || req.body.companyId, isRemoved: false });
+    console.log(company);
+    console.log(req.user);
     if (!company) {
       return res.sendStatus(HTTPStatus.BAD_REQUEST);
     }
