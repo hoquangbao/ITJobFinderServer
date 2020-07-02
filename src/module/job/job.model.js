@@ -56,6 +56,7 @@ JobSchema.methods = {
   toJSON() {
     return {
       _id: this._id,
+      jobName: this.jobName,
       jobDescription: this.jobDescription,
       salary: this.salary,
       companyId: this.companyId,
