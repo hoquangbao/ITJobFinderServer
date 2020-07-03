@@ -8,7 +8,7 @@ export const getListJob = async (req, res) => {
   const offset = parseInt(req.query.offset, 10) || 0;
   const limit = parseInt(req.query.limit, 10) || 0;
   try {
-    const listJob = await Job.find({ isRemoved: false }).skip(offset).limit(limit);
+    const listJob = await Job.find({ isRemoved: false }).skip(offset).limit(limit).populate('companyId', '-_id companyName address');
     const total = await listJob.length;
     return res.status(HTTPStatus.OK).json({ total, listJob });
   } catch (e) {
