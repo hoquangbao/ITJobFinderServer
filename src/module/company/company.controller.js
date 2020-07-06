@@ -55,7 +55,7 @@ export const updateCompany = async (req, res) => {
 
 export const deleteCompany = async (req, res) => {
   try {
-    const company = await Company.findOne({ _id: req.params.id, isRemoved: false });
+    const company = await Company.remove({ _id: req.params.id, isRemoved: false });
     if (!company) {
       return res.sendStatus(HTTPStatus.NOT_FOUND);
     }
