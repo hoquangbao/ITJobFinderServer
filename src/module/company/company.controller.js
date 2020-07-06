@@ -60,7 +60,7 @@ export const deleteCompany = async (req, res) => {
       return res.sendStatus(HTTPStatus.NOT_FOUND);
     }
 
-    company.remove();
+    company.isRemoved = true;
 
     await company.save();
 
