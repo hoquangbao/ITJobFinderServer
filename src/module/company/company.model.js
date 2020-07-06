@@ -12,6 +12,14 @@ const CompanySchema = new Schema({
     type: String,
     required: true,
   },
+  numberOfEmployees: {
+    type: String,
+    required: true,
+  },
+  contact: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
     required: true,
