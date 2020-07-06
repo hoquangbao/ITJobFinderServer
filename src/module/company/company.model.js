@@ -78,6 +78,10 @@ CompanySchema.methods = {
       _id: this._id,
       companyName: this.companyName,
       address: this.address,
+      contact: this.contact,
+      numberOfEmployees: this.numberOfEmployees,
+      startWorkingDate: this.startWorkingDate,
+      endWorkingDate: this.endWorkingDate,
       type: this.type,
       description: this.description,
     };
