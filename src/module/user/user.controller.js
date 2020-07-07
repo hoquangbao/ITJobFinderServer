@@ -47,8 +47,8 @@ export const register = async (req, res) => {
 export const getUserDetail = async (req, res) => {
   const id = req.params._id;
   try {
-    const userDetail = await User.findOne({ id });
-    return res.status(HTTPStatus.OK).json(userDetail);
+    const userDetail1 = await User.findOne({ id });
+    return res.status(HTTPStatus.OK).json(userDetail1);
   } catch (error) {
     return res.status(HTTPStatus.BAD_REQUEST).json(error.message);
   }
