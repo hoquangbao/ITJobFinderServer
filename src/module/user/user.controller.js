@@ -55,7 +55,7 @@ export const getUserDetail = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const id = req.params._id;
+  const id = req.user._id;
   try {
     const userDetail = await User.findOne({ id });
     if (!userDetail) {
