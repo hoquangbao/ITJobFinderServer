@@ -45,7 +45,8 @@ export const register = async (req, res) => {
 };
 
 export const getUserDetail = async (req, res) => {
-  const id = req.params._id;
+  const id = req.params;
+  console.log(id);
   try {
     const userDetail = await User.findOne({ id });
     return res.status(HTTPStatus.OK).json(userDetail);
