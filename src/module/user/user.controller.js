@@ -45,7 +45,7 @@ export const register = async (req, res) => {
 };
 
 export const getUserDetail = async (req, res) => {
-  const id = req.params;
+  const id = req.params.id;
   console.log(id);
   try {
     const userDetail = await User.findOne({ id });
