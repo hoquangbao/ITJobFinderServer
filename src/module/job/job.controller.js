@@ -7,6 +7,20 @@ import User from '../user/user.model';
 export const getListJob = async (req, res) => {
   const offset = parseInt(req.query.offset, 10) || 0;
   const limit = parseInt(req.query.limit, 10) || 0;
+  try {
+    const listJob = await Job.find({ isRemoved: false }
+    ).skip(offset).limit(limit).populate('companyId', '_id companyName ' +
+      'address description startWorkingDate endWorkingDate type contact numberOfEmployees');
+    const total = await listJob.length;
+    return res.status(HTTPStatus.OK).json({ total, listJob });
+  } catch (e) {
+    return res.status(HTTPStatus.BAD_REQUEST).json(e.message);
+  }
+};
+
+export const findJob = async (req, res) => {
+  const offset = parseInt(req.query.offset, 10) || 0;
+  const limit = parseInt(req.query.limit, 10) || 0;
   const job = req.body;
   try {
     const listJob = await Job.find({ jobName: new RegExp(job, 'i'), isRemoved: false }
