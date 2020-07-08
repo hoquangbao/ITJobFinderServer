@@ -21,7 +21,7 @@ export const getListJob = async (req, res) => {
 export const findJob = async (req, res) => {
   const offset = parseInt(req.query.offset, 10) || 0;
   const limit = parseInt(req.query.limit, 10) || 0;
-  const job = req.body;
+  const job = req.params.jobName;
   try {
     const listJob = await Job.find({ jobName: new RegExp(job, 'i'), isRemoved: false }
     ).skip(offset).limit(limit).populate('companyId', '_id companyName ' +
