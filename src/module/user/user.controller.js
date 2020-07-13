@@ -13,7 +13,8 @@ export const getListUser = async (req, res) => {
   const offset = parseInt(req.query.offset, 10) || 0;
   const limit = parseInt(req.query.limit, 10) || 0;
   try {
-    const listUser = await User.find({ isRemoved: false }).skip(offset).limit(limit);
+    const listUser = await User.find({ isRemoved: false }).skip(offset).limit(
+      limit).populate('company', '_id companyName');
     const total = await User.count();
     console.log(req.user.username);
     return res.status(HTTPStatus.OK).json({ total, listUser });
