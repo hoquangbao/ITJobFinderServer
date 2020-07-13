@@ -10,7 +10,7 @@ export const getListJob = async (req, res) => {
   try {
     const listJob = await Job.find({ isRemoved: false }
     ).skip(offset).limit(limit).populate('companyId', '_id companyName ' +
-      'address description startWorkingDate endWorkingDate type contact numberOfEmployees');
+      'address description startWorkingDate endWorkingDate type contact numberOfEmployees createdBy');
     const total = await listJob.length;
     return res.status(HTTPStatus.OK).json({ total, listJob });
   } catch (e) {
