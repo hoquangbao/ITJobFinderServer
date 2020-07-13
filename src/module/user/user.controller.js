@@ -49,7 +49,7 @@ export const getUserDetail = async (req, res) => {
   const id = req.params.id;
   console.log(id);
   try {
-    const userDetail1 = await User.findOne({ _id: id });
+    const userDetail1 = await (await User.findOne({ _id: id })).populate('company', '_id companyName');
     return res.status(HTTPStatus.OK).json(userDetail1);
   } catch (error) {
     return res.status(HTTPStatus.BAD_REQUEST).json(error.message);
