@@ -44,6 +44,10 @@ const UserSchema = new Schema({
       message: props => `${props.value} is not a valid role number`,
     },
   },
+  company: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
   isRemoved: {
     type: Boolean,
     default: false,
@@ -89,6 +93,7 @@ UserSchema.methods = {
       role: this.role,
       email: this.email,
       phone: this.phone,
+      company: this.company,
     };
   },
   toAuthJSON() {
