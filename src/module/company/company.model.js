@@ -84,6 +84,7 @@ CompanySchema.methods = {
       endWorkingDate: this.endWorkingDate,
       type: this.type,
       description: this.description,
+      createdBy: this.createdBy,
     };
   },
   toAuthJSON() {
