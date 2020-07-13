@@ -2,7 +2,7 @@ import { Router } from 'express';
 // import validate from 'express-validation';
 import * as companyController from './company.controller';
 import { authJwt } from '../../service/passport';
-import { roleEmployer, roleAdmin } from '../../service/role';
+import { roleEmployer } from '../../service/role';
 // import companyValidation from './company.validate';
 
 const routes = new Router();
