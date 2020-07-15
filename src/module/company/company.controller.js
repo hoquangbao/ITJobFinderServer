@@ -16,7 +16,7 @@ export const getListCompany = async (req, res) => {
 
 export const createCompany = async (req, res) => {
   try {
-    const company = await Company.create({ ...req.body, createdBy: req.user._id });
+    const company = await Company.create({ ...req.body });
     return res.status(HTTPStatus.OK).json(company);
   } catch (e) {
     return res.status(HTTPStatus.BAD_REQUEST).json(e.message);
