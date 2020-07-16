@@ -18,6 +18,19 @@ export const getListJob = async (req, res) => {
   }
 };
 
+export const getJob = async (req, res) => {
+  const id = req.body.userId;
+  try {
+    const listJob = await Job.find({ isRemoved: false, userId: id }
+    ).populate('companyId', '_id companyName ' +
+      'address description startWorkingDate endWorkingDate type contact numberOfEmployees');
+    const total = await listJob.length;
+    return res.status(HTTPStatus.OK).json({ total, listJob });
+  } catch (e) {
+    return res.status(HTTPStatus.BAD_REQUEST).json(e.message);
+  }
+};
+
 export const findJob = async (req, res) => {
   const offset = parseInt(req.query.offset, 10) || 0;
   const limit = parseInt(req.query.limit, 10) || 0;
