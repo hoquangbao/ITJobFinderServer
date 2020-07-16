@@ -19,7 +19,7 @@ export const getListJob = async (req, res) => {
 };
 
 export const getJob = async (req, res) => {
-  const id = req.body.userId;
+  const id = req.params.userId;
   try {
     const listJob = await Job.find({ isRemoved: false, userId: id }
     ).populate('companyId', '_id companyName ' +
