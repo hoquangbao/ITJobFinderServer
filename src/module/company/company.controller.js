@@ -17,7 +17,7 @@ export const getListCompany = async (req, res) => {
 export const getCompany = async (req, res) => {
   const offset = parseInt(req.query.offset, 10) || 0;
   const limit = parseInt(req.query.limit, 10) || 0;
-  const id = req.param.createdBy;
+  const id = req.params.createdBy;
   try {
     const listCompany = await Company.find({ createdBy: id, isRemoved: false }).skip(offset).limit(limit);
     const total = await listCompany.length;
