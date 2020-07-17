@@ -8,6 +8,7 @@ import { roleEmployer } from '../../service/role';
 const routes = new Router();
 
 routes.post('/create_company', companyController.createCompany);
+routes.get('/get_company/:createdBy', authJwt, companyController.getCompany);
 routes.get('/', authJwt, companyController.getListCompany);
 routes.get('/:id', authJwt, roleEmployer, companyController.getCompanyDetail);
 routes.patch('/:id', authJwt, roleEmployer, companyController.updateCompany);
