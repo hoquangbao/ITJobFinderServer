@@ -10,6 +10,7 @@ const routes = new Router();
 routes.post('/create_job', authJwt, validate(jobValidate.createJob), jobController.createJob);
 routes.post('/search_job', jobController.findJob);
 routes.get('/getJob/:userId', authJwt, jobController.getJob);
+// routes.get('/')
 routes.get('/', authJwt, jobController.getListJob);
 routes.get('/:id', authJwt, jobController.getJobDetail);
 routes.patch('/:id', authJwt, jobController.updateJob);
