@@ -14,6 +14,19 @@ export const getListCompany = async (req, res) => {
   }
 };
 
+export const getCompany = async (req, res) => {
+  const offset = parseInt(req.query.offset, 10) || 0;
+  const limit = parseInt(req.query.limit, 10) || 0;
+  const id = req.param.createdBy;
+  try {
+    const listCompany = await Company.find({ createdBy: id, isRemoved: false }).skip(offset).limit(limit);
+    const total = await listCompany.length;
+    return res.status(HTTPStatus.OK).json({ total, listCompany });
+  } catch (e) {
+    return res.status(HTTPStatus.BAD_REQUEST).json(e.message);
+  }
+};
+
 export const createCompany = async (req, res) => {
   try {
     const company = await Company.create({ ...req.body });
