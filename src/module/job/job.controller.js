@@ -48,14 +48,14 @@ export const findJob = async (req, res) => {
 
 export const createJob = async (req, res) => {
   try {
-    const company = await Company.findOne({ _id: req.body.companyId, isRemoved: false });
-    const user = await User.findOne({ _id: req.body.userId, isRemoved: false });
-    if (!company) {
-      return res.sendStatus(HTTPStatus.BAD_REQUEST);
-    }
-    if (!user) {
-      return res.sendStatus(HTTPStatus.BAD_REQUEST);
-    }
+    // const company = await Company.findOne({ _id: req.body.companyId, isRemoved: false });
+    // const user = await User.findOne({ _id: req.body.userId, isRemoved: false });
+    // if (!company) {
+    //   return res.sendStatus(HTTPStatus.BAD_REQUEST);
+    // }
+    // if (!user) {
+    //   return res.sendStatus(HTTPStatus.BAD_REQUEST);
+    // }
     const job = await Job.create({ ...req.body });
     return res.status(HTTPStatus.OK).json(job);
   } catch (e) {
