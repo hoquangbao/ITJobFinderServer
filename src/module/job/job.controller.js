@@ -1,7 +1,5 @@
 import HTTPStatus from 'http-status';
 import Job from './job.model';
-import Company from '../company/company.model';
-import User from '../user/user.model';
 
 
 export const getListJob = async (req, res) => {
