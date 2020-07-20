@@ -44,6 +44,21 @@ export const findJob = async (req, res) => {
   }
 };
 
+export const searchCompanyJob = async (req, res) => {
+  const offset = parseInt(req.query.offset, 10) || 0;
+  const limit = parseInt(req.query.limit, 10) || 0;
+  const job = req.body.jobName;
+  try {
+    const listJob = await Job.find({ jobName: new RegExp(job, 'i'), userId: req.params.userId, isRemoved: false }
+    ).skip(offset).limit(limit).populate('companyId', '_id companyName ' +
+      'address description startWorkingDate endWorkingDate type contact numberOfEmployees');
+    const total = await listJob.length;
+    return res.status(HTTPStatus.OK).json({ total, listJob });
+  } catch (e) {
+    return res.status(HTTPStatus.BAD_REQUEST).json(e.message);
+  }
+};
+
 export const createJob = async (req, res) => {
   try {
     const job = await Job.create({ ...req.body });
