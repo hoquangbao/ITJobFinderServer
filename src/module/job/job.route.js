@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import validate from 'express-validation';
 import * as jobController from './job.controller';
 import { authJwt } from '../../service/passport';
 // import { roleEmployer } from '../../service/role';
