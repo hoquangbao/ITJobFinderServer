@@ -7,6 +7,7 @@ const routes = new Router();
 
 routes.post('/create_job', jobController.createJob);
 routes.post('/search_job', jobController.findJob);
+routes.post('/search_company_job/:userId', jobController.searchCompanyJob);
 routes.get('/getJob/:userId', authJwt, jobController.getJob);
 // routes.get('/')
 routes.get('/', authJwt, jobController.getListJob);
